@@ -21,7 +21,6 @@ public class AccountService {
         return accountRepository.save(account);
     }
     
-
     public Account getAccountById(Long id) {
         return accountRepository.findById(id).orElse(null);
     }
@@ -29,19 +28,35 @@ public class AccountService {
     public List<Account> getAllAccounts() {
         return accountRepository.findAll();
     }
-
     public void deleteAccount(Long id) {
+        if(id==null)
+        {
+            throw new  RuntimeException(" Id not found...!");
+        }
         accountRepository.deleteById(id);
     }
 
     public Account deposit(String accountNumber, double amount) {
         Account account = accountRepository.findByAccountNumber(accountNumber);
+        if (account==null) 
+        {
+            throw new RuntimeException("account not found...!");
+        }
         account.setBalance(account.getBalance() + amount);
         return accountRepository.save(account);
     }
 
     public Account withdraw(String accountNumber, double amount) {
+        System.out.println("Withdraw requested for: " + accountNumber + ", Amount: " + amount);
         Account account = accountRepository.findByAccountNumber(accountNumber);
+        if(account==null)
+        {
+            throw new RuntimeException("account not found...!"+accountNumber);
+        }
+        if(account.getBalance()<amount)
+        {
+            throw new RuntimeException("Insufficent balance...!");
+        }
         account.setBalance(account.getBalance() - amount);
         return accountRepository.save(account);
     }
