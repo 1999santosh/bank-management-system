@@ -25,7 +25,7 @@ focusing on core banking functionalities like account creation, deposit, update,
 
 - spring.datasource.url=jdbc:mysql://localhost:3306/studentdb
 - spring.datasource.username=root
-- spring.datasource.password=Nikhil@1234
+- spring.datasource.password=userpasword
 - spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 
 - spring.jpa.hibernate.ddl-auto=update
